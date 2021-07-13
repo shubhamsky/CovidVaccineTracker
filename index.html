@@ -36,39 +36,48 @@
     <header class="w3-container w3-light-grey w3-card-4 w3-serif" style="padding:128px 16px">
         <!-- User input Area -->
         <div class='action-area'>
-            <select id="selectFeeType" onchange="vaccineApp.setFeeType()">
-                <option value="Free">Free</option>
-                <option value="Paid">Paid</option>
-            </select>
-            <label for='pin'>Pincode:</label> <input type="pin" id="pin" placeholder='Enter pincode' value="421302">
+            <div class='custom-col'>
+                <select id="selectFeeType" onchange="vaccineApp.setFeeType()">
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                </select>
+                &nbsp;&nbsp;
+                <label for='pin'>Pincode:</label> <input type="pin" id="pin" placeholder='Enter pincode' value="421302">
+            </div>
 
-            <input type="checkbox" id="doze1" name="doz1" value="dose1" checked>
-            <label for="doze1"> dose 1</label>
-            <input type="checkbox" id="doze2" name="doz2" value="dose2">
-            <label for="doze2"> dose 2</label>
+            <div class="custom-col w3-margin-top">
+                <input type="checkbox" id="doze1" name="doz1" value="dose1" checked>
+                <label for="doze1"> dose 1</label>
+                <input type="checkbox" id="doze2" name="doz2" value="dose2">
+                <label for="doze2"> dose 2</label>
+            
 
-            <label><b>&nbsp;#Vaccine Alarm: </b> </label>
-            <a href="#" id='alarmSwitch' onclick='handleAlarm()' class="toggler off">&nbsp;</a>
-            <span class="w3-tag w3-orange">
-                <small>
-                    <b>Note:</b> Switch on the alarm to track vaccine. To Switch off click again on it.
-                    To Book vaccine when available <a href='https://selfregistration.cowin.gov.in/'>Login</a> to cowin
-                    app.
-                </small>
-            </span>
-            <br>
-            <button class='w3-btn w3-ripple w3-green w3-margin-top' onclick='getVaccine()'>
-                GetVaccine
-            </button>
+                <label><b>&nbsp;#Vaccine Alarm: </b> </label>
+                <a href="#" id='alarmSwitch' onclick='handleAlarm()' class="toggler off">&nbsp;</a>
+                <span class="w3-tag w3-orange">
+                    <small>
+                        <b>Note:</b> Switch on the alarm to track vaccine. To Switch off click again on it.
+                        To Book vaccine when available <a href='https://selfregistration.cowin.gov.in/'>Login</a> to
+                        cowin
+                        app.
+                    </small>
+                </span>
+            </div>
+            <div>
+                <button class='w3-btn w3-ripple w3-green w3-margin-top' onclick='getVaccine()'>
+                    GetVaccine
+                </button>
+            </div>
+            
         </div>
 
         <!-- Display output -->
         <div id="display">
             <span>Output Window:</span>
             <br\>
-                <div id="result">
+            <div id="result">
 
-                </div>
+            </div>
         </div>
     </header>
 

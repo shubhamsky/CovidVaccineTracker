@@ -209,7 +209,7 @@ const checkAlarmSwitch = () => {
     }
 }
 vaccineApp.setAlarmWatch = () =>{
-    vaccineApp.timer = setInterval(getVaccine, 10000);
+    vaccineApp.timer = setInterval(getVaccine, 5000);
 }
 
 checkAlarmSwitch();
