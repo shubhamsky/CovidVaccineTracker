@@ -111,7 +111,7 @@ vaccineApp.getDoseStatus = (item) => {
         	return true;
         }else{return false;}
     }
-    else{
+    else if(document.getElementById('doze2').checked){
        if(item.available_capacity_dose2 != 0){
         	return true;
         }else{return false;}

@@ -34,35 +34,41 @@
 
     <!-- Header -->
     <header class="w3-container w3-light-grey w3-card-4 w3-cursive" style="padding:128px 16px">
-        <div>
+        <!-- User input Area -->
+        <div class='action-area'>
             <select id="selectFeeType" onchange="vaccineApp.setFeeType()">
                 <option value="Free">Free</option>
                 <option value="Paid">Paid</option>
             </select>
-            <label for='pin'>Pincode:</label> <input type="pin" id="pin" value="421302">
-    
+            <label for='pin'>Pincode:</label> <input type="pin" id="pin" placeholder='Enter pincode' value="421302">
+
             <input type="checkbox" id="doze1" name="doz1" value="dose1" checked>
             <label for="doze1"> dose 1</label>
             <input type="checkbox" id="doze2" name="doz2" value="dose2">
             <label for="doze2"> dose 2</label>
-    
+
             <label><b>&nbsp;#Vaccine Alarm: </b> </label>
             <a href="#" id='alarmSwitch' onclick='handleAlarm()' class="toggler off">&nbsp;</a>
+            <span class="w3-tag w3-orange">
+                <small>
+                    <b>Note:</b> Switch on the alarm to track vaccine. To Switch off click again on it.
+                    To Book vaccine when available <a href='https://selfregistration.cowin.gov.in/'>Login</a> to cowin
+                    app.
+                </small>
+            </span>
             <br>
+            <button class='w3-btn w3-ripple w3-green w3-margin-top' onclick='getVaccine()'>
+                GetVaccine
+            </button>
         </div>
-    
-        <button class='w3-btn w3-ripple w3-green w3-margin-top' onclick='getVaccine()'>
-            GetVaccine
-        </button>
-    
+
+        <!-- Display output -->
         <div id="display">
-            <span>Output Window:</span><br\>
-            <div id="result">
-    
-            </div>
-            <div id='other'>
-    
-            </div>
+            <span>Output Window:</span>
+            <br\>
+                <div id="result">
+
+                </div>
         </div>
     </header>
 
@@ -86,7 +92,7 @@
         </p>
     </footer>
 
-    
+
     <!-- Js section -->
     <script src="js\custom.js"></script>
     <script>
