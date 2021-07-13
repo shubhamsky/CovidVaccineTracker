@@ -1,0 +1,63 @@
+#display{
+    margin: 10px 2px;
+    background-color: black;
+    padding: 10px;
+    color: red;
+  }
+  .header{
+    padding: 2px 10px;
+    margin: 2px 0;
+    border-radius:4px;
+    background-color: green;
+    color: white;
+    display: inline-block;
+  }
+  .value{
+    padding: 2px 10px;
+    margin: 2px;
+    background-color: red;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+  }
+  #enableAlarmWatch{
+    display: inline-block;
+    color: black;
+    border-radius: 9px;
+    font-weight: bold;
+    margin: 0 7px;
+    background-color: gray;
+  }
+  
+  #enableAlarmWatch.active{
+    display: inline-block;
+    color: black;
+    border-radius: 9px;
+    font-weight: bold;
+    margin: 0 7px;
+    background-color: gray;
+  }
+  
+  a.toggler {
+      background: green;
+      cursor: pointer;
+      border: 2px solid black;
+      border-right-width: 15px;
+      padding: 0 5px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all .5s ease;
+  }
+  
+  a.toggler.off {
+      background: red;
+      border-right-width: 2px;
+      border-left-width: 15px;
+  }
+  a#alarmSwitch.off::after {
+      content: 'OFF';
+  }
+  a#alarmSwitch::after {
+      content: 'ON';
+      color:white;
+  }
