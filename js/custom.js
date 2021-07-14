@@ -5,18 +5,22 @@ vaccineApp.currentDate ='13-07-2021' ;
 const outputr = document.getElementById("result");
 const switchBtn = document.getElementById("alarmSwitch");
 const selectFeeType = document.getElementById("selectFeeType");
+const pincodeInputBox = document.getElementById("pin");
+const doze1ChkBox = document.getElementById('doze1');
+const doze2ChkBox = document.getElementById('doze2');
 vaccineApp.setAlarm = false;
 vaccineApp.timer = null;
 
-//alarm
+//On Alarm Click 
 const handleAlarm = () => {
-   
    switchBtn.classList.toggle("off");
    if(switchBtn.classList.contains('off')){
       vaccineApp.setAlarm = false;
       localStorage.setItem('alarm', vaccineApp.setAlarm);
       clearInterval(vaccineApp.timer);
-   }else{
+   }
+   else
+   {
     vaccineApp.setAlarm = true;
    	localStorage.setItem('alarm', vaccineApp.setAlarm);
     vaccineApp.setAlarmWatch();
@@ -25,13 +29,14 @@ const handleAlarm = () => {
    
 //Update Url on button click   
 vaccineApp.updateUrl = () => {
- vaccineApp.pin = document.getElementById("pin").value;
+ vaccineApp.pin = pincodeInputBox.value;
  vaccineApp.currentDate = vaccineApp.getCurrentDate();
  vaccineApp.feeType = selectFeeType.value;
- console.log(vaccineApp.pin);
- console.log(vaccineApp.currentDate);
- console.log(vaccineApp.feeType);
-
+ localStorage.setItem('feeType', vaccineApp.feeType);
+ localStorage.setItem('pin', vaccineApp.pin);
+ 
+ localStorage.setItem('dose1', doze1ChkBox.checked);
+ localStorage.setItem('dose2', doze2ChkBox.checked);
  vaccineApp.api_url = 
       `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${vaccineApp.pin}&date=${vaccineApp.currentDate}`;
 }
@@ -97,21 +102,20 @@ vaccineApp.getVaccinesByFeeType = (VaccineResult) =>{
 
 //Vaccine Dose Filter
 vaccineApp.getDoseStatus = (item) => {
-    if(document.getElementById('doze1').checked && 
-    		document.getElementById('doze2').checked){
+    if(doze1ChkBox.checked && doze2ChkBox.checked){
         if(item.available_capacity_dose1 != 0 
         	&& item.available_capacity_dose2 != 0	)
         {
         	return true;
         }else{return false;}
     }
-    else if(document.getElementById('doze1').checked)
+    else if(doze1ChkBox.checked)
     {
       if(item.available_capacity_dose1 != 0){
         	return true;
         }else{return false;}
     }
-    else if(document.getElementById('doze2').checked){
+    else if(doze2ChkBox.checked){
        if(item.available_capacity_dose2 != 0){
         	return true;
         }else{return false;}
@@ -125,7 +129,7 @@ const displayOutput = (VaccineObject) => {
     console.log(VaccineObject); 
      let centerDetails = '';
      VaccineObject.forEach((val) => {
-        centerDetails += `<hr\>
+        centerDetails += `<div class='w3-card-4 w3-margin-top w3-hover-light-gray w3-padding'>
          <span class='header'>Center Name: </span>
          <span class='value' >${val.name}</span>
          <br\>
@@ -140,7 +144,7 @@ const displayOutput = (VaccineObject) => {
          <br\>
         `;
         val.list.forEach((vcenter) => {
-         let vCenterDetails = `<hr\>
+         let vCenterDetails = `<div class=''>
            <span class='header'>Name: </span>
            <span class='value' >${val.name}</span>
            <br\>
@@ -158,11 +162,11 @@ const displayOutput = (VaccineObject) => {
            <br\>
            <span class='header'>Min. age required: </span>
            <span class='value' >${vcenter.min_age_limit}</span>
-           <br\>
+           </div>
         	 `;
            centerDetails += vCenterDetails;
         })
-        
+        centerDetails+= '</div><hr\>';
      });
 		 outputr.innerHTML = centerDetails;
 }
@@ -200,16 +204,39 @@ vaccineApp.getCurrentDate = () => {
 }
 
 //check alarmState
-const checkAlarmSwitch = () => {
-
+const checkAppUserState = () => {
+    //Restore the user state on refresh from local storage
 		if(localStorage.getItem('alarm') == 'true'){
      alert('alarm is on !');
      switchBtn.classList.remove('off');
      vaccineApp.setAlarmWatch();
+    }
+    if(localStorage.getItem('feeType')){
+      vaccineApp.feeType = localStorage.getItem('feeType');
+      selectFeeType.value = localStorage.getItem('feeType');
+    }
+    if(localStorage.getItem('pin')){
+      pincodeInputBox.value = localStorage.getItem('pin');
+      vaccineApp.pin = localStorage.getItem('pin');
+    } 
+    if(localStorage.getItem('dose1') && localStorage.getItem('dose1') == 'true'){
+      doze1ChkBox.checked= true;
+    }else{
+      if(localStorage.getItem('dose1') == null){
+        doze1ChkBox.checked= true;
+      }else{
+        doze1ChkBox.checked= false;
+      }
+      
+    }
+    if(localStorage.getItem('dose2') && localStorage.getItem('dose2') == 'true'){
+      doze2ChkBox.checked= true;
+    }else{
+      doze2ChkBox.checked= false;
     }
 }
 vaccineApp.setAlarmWatch = () =>{
     vaccineApp.timer = setInterval(getVaccine, 5000);
 }
 
-checkAlarmSwitch();
+checkAppUserState();
